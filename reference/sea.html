@@ -63,7 +63,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">sea</span><span class="op">(</span><span class="va">x</span>, <span class="va">event</span>, nbefore <span class="op">=</span> <span class="fl">6</span>, nafter <span class="op">=</span> <span class="fl">4</span>, event_range <span class="op">=</span> <span class="cn">TRUE</span>, n_iter <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sea</span><span class="op">(</span><span class="va">x</span>, <span class="va">event</span>, nbefore <span class="op">=</span> <span class="fl">6</span>, nafter <span class="op">=</span> <span class="fl">4</span>, event_range <span class="op">=</span> <span class="cn">TRUE</span>, n_iter <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -71,24 +71,37 @@
     <dl><dt>x</dt>
 <dd><p>A data frame climate reconstruction or tree-ring series with row
 names as years, and one numeric variable.</p></dd>
+
+
 <dt>event</dt>
 <dd><p>An numeric vector of event years for superposed epoch, such as
 fire years, or an <code>fhx</code> object with a single series as produced by
 <code><a href="composite.html">composite()</a></code>.</p></dd>
+
+
 <dt>nbefore</dt>
 <dd><p>The number of lag years prior to the event year.</p></dd>
+
+
 <dt>nafter</dt>
 <dd><p>The number of lag years following the event year.</p></dd>
+
+
 <dt>event_range</dt>
 <dd><p>Logical. Constrain the time series to the time period of
 key events within the range of the <code>x</code> series. <code>FALSE</code> uses the entire
 series, ignoring the period of key events.</p></dd>
+
+
 <dt>n_iter</dt>
 <dd><p>The number of iterations for bootstrap resampling.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <code>sea</code> object containing. This contains:</p><ul><li><p>"event_years": a numeric vector of event years.</p></li>
+    
+
+<p>A <code>sea</code> object containing. This contains:</p><ul><li><p>"event_years": a numeric vector of event years.</p></li>
 <li><p>"actual": a <code>data.frame</code> summary of the actual events.</p></li>
 <li><p>"random": a <code>data.frame</code> summary of the bootstrapped events.</p></li>
 <li><p>"departure": a <code>data.frame</code> summary of the departures of actual from
@@ -147,31 +160,31 @@ groves, Science 262:885-889.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># Read in the Cook and Krusic (2004; The North American Drought Atlas)</span></span>
-<span class="r-in"><span class="co"># reconstruction of Palmer Drought Severity Index (PDSI) for the Jemez</span></span>
-<span class="r-in"><span class="co"># Mountains area (gridpoint 133).</span></span>
-<span class="r-in"><span class="va">target_url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="st">"http://iridl.ldeo.columbia.edu"</span>,</span>
-<span class="r-in">  <span class="st">"/SOURCES/.LDEO/.TRL/.NADA2004"</span>,</span>
-<span class="r-in">  <span class="st">"/pdsiatlashtml/pdsiwebdata/1050w_350n_133.txt"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="va">pdsi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="va">target_url</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, row.names <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">pdsi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">pdsi</span>, select <span class="op">=</span> <span class="st">"RECON"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Run SEA on Peggy Mesa (pgm) data</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">pgm</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">pgm_comp</span> <span class="op">&lt;-</span> <span class="fu"><a href="composite.html">composite</a></span><span class="op">(</span><span class="va">pgm</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">pgm_sea</span> <span class="op">&lt;-</span> <span class="fu">sea</span><span class="op">(</span><span class="va">pdsi</span>, <span class="va">pgm_comp</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># See basic results:</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">pgm_sea</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Basic plot:</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pgm_sea</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># Read in the Cook and Krusic (2004; The North American Drought Atlas)</span></span></span>
+<span class="r-in"><span><span class="co"># reconstruction of Palmer Drought Severity Index (PDSI) for the Jemez</span></span></span>
+<span class="r-in"><span><span class="co"># Mountains area (gridpoint 133).</span></span></span>
+<span class="r-in"><span><span class="va">target_url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"http://iridl.ldeo.columbia.edu"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"/SOURCES/.LDEO/.TRL/.NADA2004"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"/pdsiatlashtml/pdsiwebdata/1050w_350n_133.txt"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pdsi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="va">target_url</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, row.names <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pdsi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">pdsi</span>, select <span class="op">=</span> <span class="st">"RECON"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Run SEA on Peggy Mesa (pgm) data</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">pgm</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pgm_comp</span> <span class="op">&lt;-</span> <span class="fu"><a href="composite.html">composite</a></span><span class="op">(</span><span class="va">pgm</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">pgm_sea</span> <span class="op">&lt;-</span> <span class="fu">sea</span><span class="op">(</span><span class="va">pdsi</span>, <span class="va">pgm_comp</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># See basic results:</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">pgm_sea</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Basic plot:</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pgm_sea</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -186,7 +199,7 @@ groves, Science 262:885-889.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

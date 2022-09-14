@@ -63,47 +63,55 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">plot_demograph</span><span class="op">(</span>
-  <span class="va">x</span>,
-  <span class="va">color_group</span>,
-  <span class="va">color_id</span>,
-  <span class="va">facet_group</span>,
-  <span class="va">facet_id</span>,
-  facet_type <span class="op">=</span> <span class="st">"grid"</span>,
-  ylabels <span class="op">=</span> <span class="cn">TRUE</span>,
-  yearlims <span class="op">=</span> <span class="cn">FALSE</span>,
-  composite_rug <span class="op">=</span> <span class="cn">FALSE</span>,
-  filter_prop <span class="op">=</span> <span class="fl">0.25</span>,
-  filter_min_rec <span class="op">=</span> <span class="fl">2</span>,
-  filter_min_events <span class="op">=</span> <span class="fl">1</span>,
-  injury_event <span class="op">=</span> <span class="cn">FALSE</span>,
-  plot_legend <span class="op">=</span> <span class="cn">FALSE</span>,
-  event_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>Scar <span class="op">=</span> <span class="fl">4</span>, Injury <span class="op">=</span> <span class="fl">2</span>, `Pith/Bark` <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span>,
-  rugbuffer_size <span class="op">=</span> <span class="fl">2</span>,
-  rugdivide_pos <span class="op">=</span> <span class="fl">2</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">plot_demograph</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">color_group</span>,</span>
+<span>  <span class="va">color_id</span>,</span>
+<span>  <span class="va">facet_group</span>,</span>
+<span>  <span class="va">facet_id</span>,</span>
+<span>  facet_type <span class="op">=</span> <span class="st">"grid"</span>,</span>
+<span>  ylabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  yearlims <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  composite_rug <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  filter_prop <span class="op">=</span> <span class="fl">0.25</span>,</span>
+<span>  filter_min_rec <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  filter_min_events <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  injury_event <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  plot_legend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  event_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>Scar <span class="op">=</span> <span class="fl">4</span>, Injury <span class="op">=</span> <span class="fl">2</span>, `Pith/Bark` <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span>,</span>
+<span>  rugbuffer_size <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  rugdivide_pos <span class="op">=</span> <span class="fl">2</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>An <code>fhx</code> object, as from <code><a href="fhx.html">fhx()</a></code></p></dd>
+
+
 <dt>color_group</dt>
 <dd><p>Option to plot series with colors. This is a character
 vector or factor which corresponds to the series names given in
 <code>color_id</code>. Both <code>color_group</code> and <code>color_id</code> need to be
 specified. Default plot gives no color.</p></dd>
+
+
 <dt>color_id</dt>
 <dd><p>Option to plot series with colors. A character vector of
 series names corresponding to groups given in <code>color_group.</code> Every
 unique value in <code>x</code> series.names needs to have a corresponding
 color_group value. Both <code>color_group</code> and <code>color_id</code> need to be
 specified. Default plot gives no species colors.</p></dd>
+
+
 <dt>facet_group</dt>
 <dd><p>Option to plot series with faceted by a factor. A vector
 of factors or character vector which corresponds to the series names given
 in <code>facet_id.</code> Both <code>facet_group</code> and <code>facet_id</code> need to be
 specified. Default plot is not faceted.</p></dd>
+
+
 <dt>facet_id</dt>
 <dd><p>Option to plot series with faceted by a factor. A vector of
 series names corresponding to species names given in <code>facet_group.</code>
@@ -112,96 +120,123 @@ facet_group value. Both <code>facet_group</code> and <code>facet_id</code> need 
 specified.  Default plot is not faceted. Note that <code>composite_rug</code>,
 <code>facet_group</code>, and <code>facet_id</code> cannot be used in the same plot. You must
 choose facets or a composite rug.</p></dd>
+
+
 <dt>facet_type</dt>
 <dd><p>Type of ggplot2 facet to use, if faceting. Must be
 either "grid" or "wrap". Default is "grid". Note that <code>composite_rug</code>,
 <code>facet_group</code>, and <code>facet_id</code> cannot be used in the same plot. You must
 choose facets or a composite rug.</p></dd>
+
+
 <dt>ylabels</dt>
 <dd><p>Optional boolean to remove y-axis (series name) labels and
 tick  marks. Default is TRUE.</p></dd>
+
+
 <dt>yearlims</dt>
 <dd><p>Option to limit the plot to a range of years. This is a
 vector with two integers. The first integer gives the lower year for the
 range while the second integer gives the upper year. The default is to
 plot the full range of data given by <code>x</code>.</p></dd>
+
+
 <dt>composite_rug</dt>
 <dd><p>A boolean option to plot a rug on the bottom of the
 plot. Default is FALSE. Note that <code>composite_rug</code> and <code>facet_group</code>,
 <code>facet_id</code> cannot be used in the same plot. You must choose facets or a
 composite rug.</p></dd>
+
+
 <dt>filter_prop</dt>
 <dd><p>The minimum proportion of fire events in recording series
 needed for fire event to be considered for composite. Default is 0.25.</p></dd>
+
+
 <dt>filter_min_rec</dt>
 <dd><p>The minimum number of recording series needed for a
 fire event to be considered for the composite. Default is 2 recording
 series.</p></dd>
+
+
 <dt>filter_min_events</dt>
 <dd><p>The minimum number of fire scars needed for a fire
 event to be considered for the composite. Default is 1. Fire injuries are
 included in this count if <code>injury_event</code>  is <code>TRUE</code>.</p></dd>
+
+
 <dt>injury_event</dt>
 <dd><p>Boolean indicating whether injuries should be considered
 events. Default is <code>FALSE</code>.</p></dd>
+
+
 <dt>plot_legend</dt>
 <dd><p>A boolean option allowing the user to choose whether a
 legend is included in the plot or not. Default is <code>FALSE</code>.</p></dd>
+
+
 <dt>event_size</dt>
 <dd><p>An optional numeric vector that adjusts the size of fire
 event symbols on the plot. Default is
 <code>c("Scar" = 4, "Injury" = 2, "Pith/Bark" = 1.5)</code>.</p></dd>
+
+
 <dt>rugbuffer_size</dt>
 <dd><p>An optional integer. If the user plots a rug, this
 controls the amount of buffer whitespace along the y-axis between the rug
 and the main plot. Must be &gt;= 2.</p></dd>
+
+
 <dt>rugdivide_pos</dt>
 <dd><p>Optional integer if plotting a rug. Adjust the
 placement of the rug divider along the y-axis. Default is 2.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <code>ggplot</code> object for plotting or manipulation.</p>
+    
+
+<p>A <code>ggplot</code> object for plotting or manipulation.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">lgr2</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">lgr2</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">lgr2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">lgr2</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot_demograph-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">lgr2</span>, ylabels <span class="op">=</span> <span class="cn">FALSE</span>, plot_legend <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">lgr2</span>, ylabels <span class="op">=</span> <span class="cn">FALSE</span>, plot_legend <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot_demograph-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">lgr2_meta</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># With color showing species.</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">lgr2</span>,</span>
-<span class="r-in">  color_group <span class="op">=</span> <span class="va">lgr2_meta</span><span class="op">$</span><span class="va">SpeciesID</span>,</span>
-<span class="r-in">  color_id <span class="op">=</span> <span class="va">lgr2_meta</span><span class="op">$</span><span class="va">TreeID</span>,</span>
-<span class="r-in">  plot_legend <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">lgr2_meta</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># With color showing species.</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">lgr2</span>,</span></span>
+<span class="r-in"><span>  color_group <span class="op">=</span> <span class="va">lgr2_meta</span><span class="op">$</span><span class="va">SpeciesID</span>,</span></span>
+<span class="r-in"><span>  color_id <span class="op">=</span> <span class="va">lgr2_meta</span><span class="op">$</span><span class="va">TreeID</span>,</span></span>
+<span class="r-in"><span>  plot_legend <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot_demograph-3.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="co"># With facets for each species.</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">lgr2</span>,</span>
-<span class="r-in">  facet_group <span class="op">=</span> <span class="va">lgr2_meta</span><span class="op">$</span><span class="va">SpeciesID</span>,</span>
-<span class="r-in">  facet_id <span class="op">=</span> <span class="va">lgr2_meta</span><span class="op">$</span><span class="va">TreeID</span>,</span>
-<span class="r-in">  plot_legend <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># With facets for each species.</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">lgr2</span>,</span></span>
+<span class="r-in"><span>  facet_group <span class="op">=</span> <span class="va">lgr2_meta</span><span class="op">$</span><span class="va">SpeciesID</span>,</span></span>
+<span class="r-in"><span>  facet_id <span class="op">=</span> <span class="va">lgr2_meta</span><span class="op">$</span><span class="va">TreeID</span>,</span></span>
+<span class="r-in"><span>  plot_legend <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot_demograph-4.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Append annotation onto a ggplot object.</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">plot_demograph</span><span class="op">(</span><span class="va">lgr2</span>,</span>
-<span class="r-in">  color_group <span class="op">=</span> <span class="va">lgr2_meta</span><span class="op">$</span><span class="va">SpeciesID</span>,</span>
-<span class="r-in">  color_id <span class="op">=</span> <span class="va">lgr2_meta</span><span class="op">$</span><span class="va">TreeID</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="co"># Add transparent box as annotation to plot.</span></span>
-<span class="r-in"><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html" class="external-link">annotate</a></span><span class="op">(</span><span class="st">"rect"</span>,</span>
-<span class="r-in">  xmin <span class="op">=</span> <span class="fl">1750</span>, xmax <span class="op">=</span> <span class="fl">1805</span>,</span>
-<span class="r-in">  ymin <span class="op">=</span> <span class="fl">3.5</span>, ymax <span class="op">=</span> <span class="fl">13.5</span>, alpha <span class="op">=</span> <span class="fl">0.2</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Append annotation onto a ggplot object.</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">plot_demograph</span><span class="op">(</span><span class="va">lgr2</span>,</span></span>
+<span class="r-in"><span>  color_group <span class="op">=</span> <span class="va">lgr2_meta</span><span class="op">$</span><span class="va">SpeciesID</span>,</span></span>
+<span class="r-in"><span>  color_id <span class="op">=</span> <span class="va">lgr2_meta</span><span class="op">$</span><span class="va">TreeID</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Add transparent box as annotation to plot.</span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html" class="external-link">annotate</a></span><span class="op">(</span><span class="st">"rect"</span>,</span></span>
+<span class="r-in"><span>  xmin <span class="op">=</span> <span class="fl">1750</span>, xmax <span class="op">=</span> <span class="fl">1805</span>,</span></span>
+<span class="r-in"><span>  ymin <span class="op">=</span> <span class="fl">3.5</span>, ymax <span class="op">=</span> <span class="fl">13.5</span>, alpha <span class="op">=</span> <span class="fl">0.2</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot_demograph-5.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -216,7 +251,7 @@ placement of the rug divider along the y-axis. Default is 2.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

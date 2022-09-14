@@ -63,20 +63,25 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">percent_scarred</span><span class="op">(</span><span class="va">x</span>, injury_event <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">percent_scarred</span><span class="op">(</span><span class="va">x</span>, injury_event <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>An <code>fhx</code> object.</p></dd>
+
+
 <dt>injury_event</dt>
 <dd><p>Boolean indicating whether years with injury events
 should be considered as scars. Default is <code>FALSE</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>data.frame</code> with four columns:</p><ul><li><p>"Year": The year.</p></li>
+    
+
+<p><code>data.frame</code> with four columns:</p><ul><li><p>"Year": The year.</p></li>
 <li><p>"NumRec": The number of recording trees.</p></li>
 <li><p>"NumScars": Number of fire scars and possibly fire injuries.</p></li>
 <li><p>"PercScarred": The proportion of scars (and possibly injuries) to
@@ -89,8 +94,8 @@ non-scar/injury series in the year.</p></li>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"pgm"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">percent_scarred</span><span class="op">(</span><span class="va">pgm</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"pgm"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">percent_scarred</span><span class="op">(</span><span class="va">pgm</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     year num_rec num_scars percent_scarred</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1   1625       1         1             100</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2   1636       2         2             100</span>
@@ -485,7 +490,7 @@ non-scar/injury series in the year.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

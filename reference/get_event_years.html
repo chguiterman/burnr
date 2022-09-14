@@ -63,31 +63,40 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_event_years</span><span class="op">(</span>
-  <span class="va">x</span>,
-  scar_event <span class="op">=</span> <span class="cn">TRUE</span>,
-  injury_event <span class="op">=</span> <span class="cn">FALSE</span>,
-  custom_grep_str <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_event_years</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  scar_event <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  injury_event <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  custom_grep_str <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>An <code>fhx</code> object.</p></dd>
+
+
 <dt>scar_event</dt>
 <dd><p>Boolean indicating whether years with scar events should be
 returned. Default is <code>TRUE</code>.</p></dd>
+
+
 <dt>injury_event</dt>
 <dd><p>Boolean indicating whether years with injury events
 should be returned. Default is <code>FALSE</code>.</p></dd>
+
+
 <dt>custom_grep_str</dt>
 <dd><p>Character string to pass a custom grep search pattern
 to search <code>x</code> "rec_type" column for. <code>NULL</code> by default.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list. Elements of the list are numeric vectors giving the years
+    
+
+<p>A list. Elements of the list are numeric vectors giving the years
 with events for each <code>fhx</code> series. Each element's name reflects the series'
 name.</p>
     </div>
@@ -109,8 +118,8 @@ year of an <code>fhx</code> object.</p></li>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">pgm</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">get_event_years</span><span class="op">(</span><span class="va">pgm</span>, scar_event <span class="op">=</span> <span class="cn">TRUE</span>, injury_event <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">pgm</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">get_event_years</span><span class="op">(</span><span class="va">pgm</span>, scar_event <span class="op">=</span> <span class="cn">TRUE</span>, injury_event <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $PGM45</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> integer(0)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -279,9 +288,9 @@ year of an <code>fhx</code> object.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 39  PGM12</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 40  PGM31</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 41  PGM32</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Passing a custom string to grep. This one identified recorder years:</span></span>
-<span class="r-in"><span class="fu">get_event_years</span><span class="op">(</span><span class="va">pgm</span>, custom_grep_str <span class="op">=</span> <span class="st">"recorder_"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Passing a custom string to grep. This one identified recorder years:</span></span></span>
+<span class="r-in"><span><span class="fu">get_event_years</span><span class="op">(</span><span class="va">pgm</span>, custom_grep_str <span class="op">=</span> <span class="st">"recorder_"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> burnr::get_events(): custom_search_str was defined, ignoring scar_event and injury_event arguments</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $PGM45</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008</span>
@@ -587,14 +596,14 @@ year of an <code>fhx</code> object.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 39  PGM12</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 40  PGM31</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 41  PGM32</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use with composite to get composite years:</span></span>
-<span class="r-in"><span class="va">comp</span> <span class="op">&lt;-</span> <span class="fu"><a href="composite.html">composite</a></span><span class="op">(</span><span class="va">pgm</span>, comp_name <span class="op">=</span> <span class="st">"pgm"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">event_yrs</span> <span class="op">&lt;-</span> <span class="fu">get_event_years</span><span class="op">(</span><span class="va">comp</span><span class="op">)</span><span class="op">[[</span><span class="st">"pgm"</span><span class="op">]</span><span class="op">]</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">event_yrs</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use with composite to get composite years:</span></span></span>
+<span class="r-in"><span><span class="va">comp</span> <span class="op">&lt;-</span> <span class="fu"><a href="composite.html">composite</a></span><span class="op">(</span><span class="va">pgm</span>, comp_name <span class="op">=</span> <span class="st">"pgm"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">event_yrs</span> <span class="op">&lt;-</span> <span class="fu">get_event_years</span><span class="op">(</span><span class="va">comp</span><span class="op">)</span><span class="op">[[</span><span class="st">"pgm"</span><span class="op">]</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">event_yrs</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1636 1648 1664 1674 1685 1714 1724 1737 1746 1748 1752 1782 1789 1795 1798</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [16] 1806 1818 1824 1842 1863 1871</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -609,7 +618,7 @@ year of an <code>fhx</code> object.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -63,16 +63,19 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for intervals</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for intervals</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>An <code>intervals</code> object.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments that are tossed.</p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -81,10 +84,10 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">pgm</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">interv</span> <span class="op">&lt;-</span> <span class="fu"><a href="intervals.html">intervals</a></span><span class="op">(</span><span class="fu"><a href="composite.html">composite</a></span><span class="op">(</span><span class="va">pgm</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">pgm</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">interv</span> <span class="op">&lt;-</span> <span class="fu"><a href="intervals.html">intervals</a></span><span class="op">(</span><span class="fu"><a href="composite.html">composite</a></span><span class="op">(</span><span class="va">pgm</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>ties should not be present for the Kolmogorov-Smirnov test</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">interv</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">interv</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 	Interval Analysis</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 	=================</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -113,10 +116,10 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> Percentiles</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> -----------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> lower (12.5%): 19.3 | weibull median (50.0%): 10.6 | upper (87.5%): 3.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lower (12.5%): 3.9 | weibull median (50.0%): 10.6 | upper (87.5%): 20.6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> One-sample Kolmogorov-Smirnov test</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Asymptotic one-sample Kolmogorov-Smirnov test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ---------------------------------------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> D^- = 0.12776, p = 0.89978</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Null hypothesis: The intervals were sampled from the theoretical</span>
@@ -125,9 +128,9 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>     distribution.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Note, you can also catch the printed table:</span></span>
-<span class="r-in"><span class="va">summary_stats</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">interv</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Note, you can also catch the printed table:</span></span></span>
+<span class="r-in"><span><span class="va">summary_stats</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">interv</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 	Interval Analysis</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 	=================</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -156,10 +159,10 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> Percentiles</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> -----------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> lower (12.5%): 19.3 | weibull median (50.0%): 10.6 | upper (87.5%): 3.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lower (12.5%): 3.9 | weibull median (50.0%): 10.6 | upper (87.5%): 20.6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> One-sample Kolmogorov-Smirnov test</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Asymptotic one-sample Kolmogorov-Smirnov test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ---------------------------------------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> D^- = 0.12776, p = 0.89978</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Null hypothesis: The intervals were sampled from the theoretical</span>
@@ -168,7 +171,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>     distribution.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -183,7 +186,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

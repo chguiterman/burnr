@@ -63,14 +63,15 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for fhx</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for fhx</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>...</dt>
 <dd><p>Arguments passed on to <code><a href="plot_demograph.html">plot_demograph()</a></code>.</p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -79,41 +80,41 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">lgr2</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">lgr2</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">lgr2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">lgr2</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot.fhx-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">lgr2</span>, ylabels <span class="op">=</span> <span class="cn">FALSE</span>, plot_legend <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">lgr2</span>, ylabels <span class="op">=</span> <span class="cn">FALSE</span>, plot_legend <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot.fhx-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">lgr2_meta</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># With color showing species.</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">lgr2</span>,</span>
-<span class="r-in">  color_group <span class="op">=</span> <span class="va">lgr2_meta</span><span class="op">$</span><span class="va">SpeciesID</span>,</span>
-<span class="r-in">  color_id <span class="op">=</span> <span class="va">lgr2_meta</span><span class="op">$</span><span class="va">TreeID</span>,</span>
-<span class="r-in">  plot_legend <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">lgr2_meta</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># With color showing species.</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">lgr2</span>,</span></span>
+<span class="r-in"><span>  color_group <span class="op">=</span> <span class="va">lgr2_meta</span><span class="op">$</span><span class="va">SpeciesID</span>,</span></span>
+<span class="r-in"><span>  color_id <span class="op">=</span> <span class="va">lgr2_meta</span><span class="op">$</span><span class="va">TreeID</span>,</span></span>
+<span class="r-in"><span>  plot_legend <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot.fhx-3.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="co"># With facets for each species.</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">lgr2</span>,</span>
-<span class="r-in">  facet_group <span class="op">=</span> <span class="va">lgr2_meta</span><span class="op">$</span><span class="va">SpeciesID</span>,</span>
-<span class="r-in">  facet_id <span class="op">=</span> <span class="va">lgr2_meta</span><span class="op">$</span><span class="va">TreeID</span>,</span>
-<span class="r-in">  plot_legend <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># With facets for each species.</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">lgr2</span>,</span></span>
+<span class="r-in"><span>  facet_group <span class="op">=</span> <span class="va">lgr2_meta</span><span class="op">$</span><span class="va">SpeciesID</span>,</span></span>
+<span class="r-in"><span>  facet_id <span class="op">=</span> <span class="va">lgr2_meta</span><span class="op">$</span><span class="va">TreeID</span>,</span></span>
+<span class="r-in"><span>  plot_legend <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot.fhx-4.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Append annotation onto a ggplot object.</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Append annotation onto a ggplot object.</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: ggplot2</span>
-<span class="r-in"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="plot_demograph.html">plot_demograph</a></span><span class="op">(</span><span class="va">lgr2</span>,</span>
-<span class="r-in">  color_group <span class="op">=</span> <span class="va">lgr2_meta</span><span class="op">$</span><span class="va">SpeciesID</span>,</span>
-<span class="r-in">  color_id <span class="op">=</span> <span class="va">lgr2_meta</span><span class="op">$</span><span class="va">TreeID</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="co"># Add transparent box as annotation to plot.</span></span>
-<span class="r-in"><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html" class="external-link">annotate</a></span><span class="op">(</span><span class="st">"rect"</span>,</span>
-<span class="r-in">  xmin <span class="op">=</span> <span class="fl">1750</span>, xmax <span class="op">=</span> <span class="fl">1805</span>,</span>
-<span class="r-in">  ymin <span class="op">=</span> <span class="fl">3.5</span>, ymax <span class="op">=</span> <span class="fl">13.5</span>, alpha <span class="op">=</span> <span class="fl">0.2</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="plot_demograph.html">plot_demograph</a></span><span class="op">(</span><span class="va">lgr2</span>,</span></span>
+<span class="r-in"><span>  color_group <span class="op">=</span> <span class="va">lgr2_meta</span><span class="op">$</span><span class="va">SpeciesID</span>,</span></span>
+<span class="r-in"><span>  color_id <span class="op">=</span> <span class="va">lgr2_meta</span><span class="op">$</span><span class="va">TreeID</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Add transparent box as annotation to plot.</span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html" class="external-link">annotate</a></span><span class="op">(</span><span class="st">"rect"</span>,</span></span>
+<span class="r-in"><span>  xmin <span class="op">=</span> <span class="fl">1750</span>, xmax <span class="op">=</span> <span class="fl">1805</span>,</span></span>
+<span class="r-in"><span>  ymin <span class="op">=</span> <span class="fl">3.5</span>, ymax <span class="op">=</span> <span class="fl">13.5</span>, alpha <span class="op">=</span> <span class="fl">0.2</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot.fhx-5.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -129,7 +130,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -63,24 +63,31 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">fhx</span><span class="op">(</span><span class="va">year</span>, <span class="va">series</span>, <span class="va">rec_type</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fhx</span><span class="op">(</span><span class="va">year</span>, <span class="va">series</span>, <span class="va">rec_type</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>year</dt>
 <dd><p>An n-length numeric vector of observation years.</p></dd>
+
+
 <dt>series</dt>
 <dd><p>An n-length factor or character vector of observation series
 names.</p></dd>
+
+
 <dt>rec_type</dt>
 <dd><p>An n-length factor or character vector denoting the record
 type for each observations. Note that this needs to use a controlled
 vocabulary, see <code>burnr:::rec_type_all</code> for all possible values.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An <code>fhx</code> object. <code>fhx</code> are S3 objects; specialized data frames with 3
+    
+
+<p>An <code>fhx</code> object. <code>fhx</code> are S3 objects; specialized data frames with 3
 columns:</p><ul><li><p>"year": An n-length numeric vector. The year of an observation.</p></li>
 <li><p>"series": An n-length factor. Giving the series name for each
 observation.</p></li>
@@ -113,17 +120,17 @@ full facors with proper levels.</p></li>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">fhx</span><span class="op">(</span></span>
-<span class="r-in">  year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1900</span>, <span class="fl">1954</span>, <span class="fl">1996</span><span class="op">)</span>,</span>
-<span class="r-in">  series <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"tree1"</span>, <span class="fl">3</span><span class="op">)</span>,</span>
-<span class="r-in">  rec_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pith_year"</span>, <span class="st">"unknown_fs"</span>, <span class="st">"bark_year"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">fhx</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1900</span>, <span class="fl">1954</span>, <span class="fl">1996</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  series <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"tree1"</span>, <span class="fl">3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  rec_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pith_year"</span>, <span class="st">"unknown_fs"</span>, <span class="st">"bark_year"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   year series   rec_type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 1900  tree1  pith_year</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 1954  tree1 unknown_fs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3 1996  tree1  bark_year</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -138,7 +145,7 @@ full facors with proper levels.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

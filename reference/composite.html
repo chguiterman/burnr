@@ -63,41 +63,54 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">composite</span><span class="op">(</span>
-  <span class="va">x</span>,
-  filter_prop <span class="op">=</span> <span class="fl">0.25</span>,
-  filter_min_rec <span class="op">=</span> <span class="fl">2</span>,
-  filter_min_events <span class="op">=</span> <span class="fl">1</span>,
-  injury_event <span class="op">=</span> <span class="cn">FALSE</span>,
-  comp_name <span class="op">=</span> <span class="st">"COMP"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">composite</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  filter_prop <span class="op">=</span> <span class="fl">0.25</span>,</span>
+<span>  filter_min_rec <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  filter_min_events <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  injury_event <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  comp_name <span class="op">=</span> <span class="st">"COMP"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>An <code>fhx</code> object.</p></dd>
+
+
 <dt>filter_prop</dt>
 <dd><p>The minimum proportion of fire events in recording series
 needed for fire event to be considered for composite. Default is 0.25.</p></dd>
+
+
 <dt>filter_min_rec</dt>
 <dd><p>The minimum number of recording series needed for a
 fire event to be considered for the composite. Default is 2 recording
 series.</p></dd>
+
+
 <dt>filter_min_events</dt>
 <dd><p>The minimum number of fire scars needed for a fire
 event to be considered for the composite. Default is 1. Fire injuries are
 included in this count if <code>injury_event</code>  is <code>TRUE</code>.</p></dd>
+
+
 <dt>injury_event</dt>
 <dd><p>Boolean indicating whether injuries should be considered
 events. Default is <code>FALSE</code>.</p></dd>
+
+
 <dt>comp_name</dt>
 <dd><p>Character vector of the series name for the returned <code>fhx</code>
 object composite series. Default is 'COMP'.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An <code>fhx</code> object representing the composited series. The object will
+    
+
+<p>An <code>fhx</code> object representing the composited series. The object will
 be empty if there are nocomposite-worthy events.</p>
     </div>
     <div id="see-also">
@@ -118,17 +131,17 @@ of an <code>fhx</code> object.</p></li>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">lgr2</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">composite</span><span class="op">(</span><span class="va">lgr2</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">lgr2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">composite</span><span class="op">(</span><span class="va">lgr2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="composite-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use with composite to get composite years:</span></span>
-<span class="r-in"><span class="va">comp</span> <span class="op">&lt;-</span> <span class="fu">composite</span><span class="op">(</span><span class="va">pgm</span>, comp_name <span class="op">=</span> <span class="st">"pgm"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">event_yrs</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_event_years.html">get_event_years</a></span><span class="op">(</span><span class="va">comp</span><span class="op">)</span><span class="op">[[</span><span class="st">"pgm"</span><span class="op">]</span><span class="op">]</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">event_yrs</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use with composite to get composite years:</span></span></span>
+<span class="r-in"><span><span class="va">comp</span> <span class="op">&lt;-</span> <span class="fu">composite</span><span class="op">(</span><span class="va">pgm</span>, comp_name <span class="op">=</span> <span class="st">"pgm"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">event_yrs</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_event_years.html">get_event_years</a></span><span class="op">(</span><span class="va">comp</span><span class="op">)</span><span class="op">[[</span><span class="st">"pgm"</span><span class="op">]</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">event_yrs</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1636 1648 1664 1674 1685 1714 1724 1737 1746 1748 1752 1782 1789 1795 1798</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [16] 1806 1818 1824 1842 1863 1871</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -143,7 +156,7 @@ of an <code>fhx</code> object.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
