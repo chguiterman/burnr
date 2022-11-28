@@ -10,6 +10,8 @@ Changes in this release:
 
 * Update `sea()` so that only event years that are used are provided in the list output (@chguiterman, #187)
 
+* Add feature to `burnr:::list_filestrings()` that selects scar/injury features over end-year codes when using `write_fhx()` (CHG)
+
 
 # burnr v0.6.1
 

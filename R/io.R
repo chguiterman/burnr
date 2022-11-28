@@ -145,6 +145,7 @@ read_fhx <- function(fname, encoding, text) {
 #'   * "body".
 #' Each referring to a portion of an FHX file that the strings are dumped into.
 #'
+#' @importFrom dplyr %>% filter anti_join summarize group_by n
 #' @importFrom tidyr pivot_wider
 #' @importFrom rlang .data
 #'
@@ -152,6 +153,21 @@ read_fhx <- function(fname, encoding, text) {
 list_filestrings <- function(x) {
   stopifnot(is_fhx(x))
   out <- x
+  # Check for years with BOTH an end-year code and injury/scar
+  yr_dups <- out %>%
+    group_by(.data$series, .data$year) %>%
+    summarize(n_rec = n()) %>%
+    filter(.data$n_rec > 1)
+  # KEEP the injury/scar
+  if (nrow(yr_dups) > 0) {
+    for (i in seq_along(nrow(yr_dups))) {
+      dup_data <- out[out$series == yr_dups$series[i] & out$year == yr_dups$year[i], ]
+      keep_row <- filter(dup_data, ! .data$rec_type %in% rec_type_ends)
+      out <- out %>%
+        anti_join(dup_data, by = c("series", "year", "rec_type")) %>%
+        rbind(keep_row)
+    }
+  }
   out$rec_type <- vapply(out$rec_type, rec_type2abrv, "") # nolint
   year_range <- seq(min(out$year), max(out$year))
   filler <- data.frame(
