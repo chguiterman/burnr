@@ -14,6 +14,8 @@ Changes in this release:
 
 * Add new function, `check_series()`, to provide feedback on potential data quality issues. This is called by `read_fhx()` and `write_fhx()` to warn users, but in the latter will trigger an error because data issues violate the creation of an FHX file or in some cases should be corrected before the data are passed on. These additions address issue #77
 
+* Add new function, `remove_duplicate_series_end()`, to remove duplicate years in a series. Often users will provide two rec_types at the beginning or end of a series, as its common for samples to degrade along the boundary of a scar or injury. These duplicate rec_types cannot be written into an FHX file, and so must be corrected. One way is to remove one of the rec_types, which is what this function does. A future function will provide the means to change the year of a rec_type.
+
 
 # burnr v0.6.1
 
