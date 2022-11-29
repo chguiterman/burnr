@@ -130,9 +130,178 @@ read_fhx <- function(fname, encoding, text) {
     year = fl_body_melt$year, series = fl_body_melt$series,
     rec_type = fl_body_melt$rec_type
   )
+  check_series(f)
   f
 }
 
+#' Diagnostic checks of common data issues in FHX objects
+#'
+#' @param x An `fhx` object.
+#' @param keep_checks Boolean indicating whether the check data should be
+#'   provided for further diagnostics. Defaults to FALSE, and only warnings or
+#'   information are provided.
+#'
+#' @return If necessary, a set of warnings and informational text to indicate
+#'   where and when issues are found. If `keep_checks = TRUE`, a list object
+#'   with the set of check data.
+#'
+#' @importFrom dplyr  %>% mutate filter group_by summarize n case_when
+#' @importFrom rlang .data
+#' @importFrom forcats fct_collapse fct_count
+#' @importFrom cli cli_alert_info cli_alert_danger
+#' @importFrom stringr str_c
+#'
+#' @examples
+#' # Nothing is returned unless an issue is found
+#' check_series(lgr2)
+#'
+#' # Informative messages flag potential issues
+#' check_series(pgm)
+#'
+#' # Danger flags warn of data quality and usability issues
+#' \dontrun{
+#' d <- read_fhx(paste0("https://github.com/ltrr-arizona-edu/burnr/",
+#'                       "files/818119/Dumb_broke_fhx.txt"))
+#' check_series(d)
+#' }
+#'
+#' @export
+
+check_series <- function(x, keep_checks = FALSE) {
+  stopifnot(is_fhx(x))
+
+  ## Read in file and collapse rec_types
+  check_file <- x %>%
+    mutate(gen_type = suppressWarnings(
+      fct_collapse(.data$rec_type,
+                   recorder = c(rec_type_recorder,
+                                rec_type_injury),
+                   inner = c("pith_year", "inner_year"),
+                   outer = c("bark_year", "outer_year"))
+    )
+    )
+
+  ## Count end types
+  end_code_counts <- check_file %>%
+    filter(.data$gen_type %in% c("inner", "outer")) %>%
+    group_by(.data$series) %>%
+    summarize(fct_count(factor(.data$gen_type))) %>%
+    suppressMessages()
+
+  ## Excluded start/end indicators
+  no_ends <- end_code_counts %>%
+    group_by(.data$series) %>%
+    summarize(n = n()) %>%
+    filter(.data$n < 2)
+
+  if (nrow(no_ends) > 0) {
+    for (i in 1:nrow(no_ends)) {
+      bad_series <- no_ends$series[i] %>% as.character()
+      bad_type <- ifelse(filter(end_code_counts,
+                                .data$series == bad_series)$f %>%
+                           as.character() == "inner", "outer", "inner")
+      cli_alert_info("{bad_series} is missing a specific {bad_type} year code.")
+    }
+  }
+
+  ## Duplicate start/end indicators
+  bad_ends <- end_code_counts %>%
+    filter(.data$n > 1)
+
+  if (nrow(bad_ends) > 0){
+    for (i in 1:nrow(bad_ends)) {
+      bad_series <- bad_ends$series[i] %>% as.character()
+      bad_type <- bad_ends$f[i] %>% as.character()
+      years <- str_c(filter(check_file,
+                            .data$series == bad_series,
+                            .data$gen_type == bad_type)$year,
+                     collapse = " and ")
+      cli_alert_danger("{bad_series} includes duplicate {bad_type} year codes in {years}.")
+    }
+  }
+
+  ## ID series lacking scar/injury codes
+  empty_series <- check_file %>%
+    group_by(.data$series) %>%
+    summarize(n_rec = sum(.data$gen_type == "recorder")) %>%
+    filter(.data$n_rec == 0)
+
+  if (nrow(empty_series) > 0) {
+    for (i in 1:nrow(empty_series)) {
+      cli_alert_info("{empty_series$series[i]} does not include any scar or injury features.")
+    }
+  }
+
+  ## Check whether scars/injuries exist beyond start/end years
+  rec_diffs <- check_file %>%
+    filter(! .data$series %in% no_ends$series,
+           ! .data$series %in% empty_series$series) %>%
+    group_by(.data$series) %>%
+    summarize(inner_diff = .data$year[.data$gen_type == "inner"] -
+                min(.data$year[.data$gen_type == "recorder"]),
+              outer_diff = max(.data$year[.data$gen_type == "recorder"] -
+                                 max(.data$year[.data$gen_type == "outer"]))
+    )
+  ## Recorder years the same as inner or outer year
+  dup_years <- rec_diffs %>%
+    filter(.data$inner_diff == 0 | .data$outer_diff == 0)
+
+  if (nrow(dup_years) > 0) {
+    for (i in 1:nrow(dup_years)) {
+      bad_series <- dup_years$series[i] %>% as.character()
+      position <- dplyr::case_when(
+        dup_years$inner_diff[i] == 0 & dup_years$outer_diff[i] == 0
+        ~ "both inner and outer year codes",
+        dup_years$inner_diff[i] == 0 ~ "the inner-year code",
+        dup_years$outer_diff[i] == 0 ~ "the outer-year code"
+      )
+      cli_alert_danger(
+        c("{bad_series} includes a scar or injury code",
+          " in the same year as {position}."),
+        wrap = TRUE
+      )
+    }
+  }
+
+  ## Recorder years before inner year
+  inner_diffs <- rec_diffs %>%
+    filter(.data$inner_diff > 0)
+
+  if (nrow(inner_diffs) > 0) {
+    for (i in 1:nrow(inner_diffs)) {
+      bad_series <- inner_diffs$series[i] %>% as.character()
+      cli_alert_danger(
+        c("{bad_series} includes a scar or injury code",
+        " {inner_diffs$inner_diff[i]} years before the inner-year code."),
+        wrap = TRUE
+      )
+    }
+  }
+
+  ## Recorder years after outer year
+  outer_diffs <- rec_diffs %>%
+    filter(.data$outer_diff  > 0)
+
+  if (nrow(outer_diffs) > 0){
+    for (i in 1:nrow(outer_diffs)) {
+      bad_series <- outer_diffs$series[i] %>% as.character()
+      cli_alert_danger(
+        c("{bad_series} includes a scar or injury code",
+        " {outer_diffs$outer_diff[i]} years after the outer-year code."),
+        wrap = TRUE
+      )
+    }
+  }
+  if (keep_checks) {
+    return(list(
+      "no_ends" = no_ends,
+      "bad_ends" = bad_ends,
+      "dup_ends" = dup_years,
+      "emtpy_series" = empty_series,
+      "inner_diffs" = inner_diffs,
+      "outer_diffs" = outer_diffs))
+  }
+}
 
 #' List of character strings to write to FHX file
 #'
@@ -199,6 +368,10 @@ list_filestrings <- function(x) {
 #'   * [write.csv()] to write a CSV file. Also works on `fhx` objects.
 #'   * [read_fhx()] to read an FHX2 file.
 #'
+#' @importFrom rlang abort
+#' @importFrom utils write.table
+#' @importFrom cli cli_alert_info
+#'
 #' @examples
 #' \dontrun{
 #' data(lgr2)
@@ -211,10 +384,18 @@ write_fhx <- function(x, fname = "") {
     stop("Please specify a character string naming a file or connection open
           for writing.")
   }
+
+  chk_list <- check_series(x, keep_checks = TRUE)
+  if (any(
+    c(nrow(chk_list$dup_ends) > 0,
+      nrow(chk_list$inner_diffs) > 0,
+      nrow(chk_list$outer_diffs) > 0)
+    )
+  ) abort("Data errors listed above prevent the creation of an FHX file")
   if (violates_canon(x)) {
-    warning(
-      "`write_fhx()` run on `fhx` object with rec_types that violate FHX2",
-      " canon - other software may not be able to read the output FHX file"
+    cli_alert_info(
+      c("The output file includes codes that violate FHX2",
+        " canon. Other software may not be able to read the file")
     )
   }
   d <- list_filestrings(x)
@@ -222,22 +403,23 @@ write_fhx <- function(x, fname = "") {
   cat(paste(d[["head_line"]], "\n", d[["subhead_line"]], "\n", sep = ""),
       file = fl, sep = ""
   )
-  utils::write.table(d[["series_heading"]], fl,
-                     append = TRUE, quote = FALSE,
-                     sep = "", na = "!",
-                     row.names = FALSE, col.names = FALSE
+  write.table(d[["series_heading"]], fl,
+              append = TRUE, quote = FALSE,
+              sep = "", na = "!",
+              row.names = FALSE, col.names = FALSE
   )
   cat("\n", file = fl, sep = "", append = TRUE)
-  utils::write.table(d[["body"]], fl,
-                     append = TRUE, quote = FALSE,
-                     sep = "", na = "!",
-                     row.names = FALSE, col.names = FALSE
+  write.table(d[["body"]], fl,
+              append = TRUE, quote = FALSE,
+              sep = "", na = "!",
+              row.names = FALSE, col.names = FALSE
   )
+
   close(fl)
 }
 
 
-#' Convert abreviated `fhx` file event char to rec_type char
+#' Convert abbreviated `fhx` file event char to rec_type char
 #'
 #' @param x A character string.
 #'
