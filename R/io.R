@@ -216,7 +216,7 @@ check_series <- function(x, keep_checks = FALSE) {
                             .data$series == bad_series,
                             .data$gen_type == bad_type)$year,
                      collapse = " and ")
-      cli_alert_danger("Series {stle_bold({bad_series})} includes duplicate {bad_type} year codes in {years}.")
+      cli_alert_danger("Series {style_bold({bad_series})} includes duplicate {bad_type} year codes in {years}.")
     }
   }
 
