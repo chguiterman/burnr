@@ -148,7 +148,7 @@ read_fhx <- function(fname, encoding, text) {
 #' @importFrom dplyr  %>% mutate filter group_by summarize n case_when
 #' @importFrom rlang .data
 #' @importFrom forcats fct_collapse fct_count
-#' @importFrom cli cli_alert_info cli_alert_danger
+#' @importFrom cli cli_alert_info cli_alert_danger style_bold
 #' @importFrom stringr str_c
 #'
 #' @examples
@@ -200,7 +200,7 @@ check_series <- function(x, keep_checks = FALSE) {
       bad_type <- ifelse(filter(end_code_counts,
                                 .data$series == bad_series)$f %>%
                            as.character() == "inner", "outer", "inner")
-      cli_alert_info("{bad_series} is missing a specific {bad_type} year code.")
+      cli_alert_info("Series {style_bold({bad_series})} is missing a specific {bad_type} year code.")
     }
   }
 
@@ -216,7 +216,7 @@ check_series <- function(x, keep_checks = FALSE) {
                             .data$series == bad_series,
                             .data$gen_type == bad_type)$year,
                      collapse = " and ")
-      cli_alert_danger("{bad_series} includes duplicate {bad_type} year codes in {years}.")
+      cli_alert_danger("Series {stle_bold({bad_series})} includes duplicate {bad_type} year codes in {years}.")
     }
   }
 
@@ -228,7 +228,7 @@ check_series <- function(x, keep_checks = FALSE) {
 
   if (nrow(empty_series) > 0) {
     for (i in 1:nrow(empty_series)) {
-      cli_alert_info("{empty_series$series[i]} does not include any scar or injury features.")
+      cli_alert_info("Series {style_bold({empty_series$series[i]})} does not include any scar or injury features.")
     }
   }
 
@@ -256,7 +256,7 @@ check_series <- function(x, keep_checks = FALSE) {
         dup_years$outer_diff[i] == 0 ~ "the outer-year code"
       )
       cli_alert_danger(
-        c("{bad_series} includes a scar or injury code",
+        c("Series {style_bold({bad_series})} includes a scar or injury code",
           " in the same year as {position}."),
         wrap = TRUE
       )
@@ -271,7 +271,7 @@ check_series <- function(x, keep_checks = FALSE) {
     for (i in 1:nrow(inner_diffs)) {
       bad_series <- inner_diffs$series[i] %>% as.character()
       cli_alert_danger(
-        c("{bad_series} includes a scar or injury code",
+        c("Series {style_bold({bad_series})} includes a scar or injury code",
         " {inner_diffs$inner_diff[i]} years before the inner-year code."),
         wrap = TRUE
       )
@@ -286,7 +286,7 @@ check_series <- function(x, keep_checks = FALSE) {
     for (i in 1:nrow(outer_diffs)) {
       bad_series <- outer_diffs$series[i] %>% as.character()
       cli_alert_danger(
-        c("{bad_series} includes a scar or injury code",
+        c("Series {style_bold({bad_series})} includes a scar or injury code",
         " {outer_diffs$outer_diff[i]} years after the outer-year code."),
         wrap = TRUE
       )
