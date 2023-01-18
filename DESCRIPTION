@@ -30,6 +30,6 @@ Imports:
     stats,
     stringr,
     tidyr
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr

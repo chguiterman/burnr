@@ -5,6 +5,7 @@
 #'   use the system default in R.
 #' @param text Character string. If `fname` is not provided and text is, then
 #'   data is read from text using a text connection.
+#' @param verbose When TRUE (default) provides feedback regarding the file
 #'
 #' @return An `fhx` object, as returned by [fhx()].
 #'
@@ -19,7 +20,7 @@
 #' }
 #'
 #' @export
-read_fhx <- function(fname, encoding, text) {
+read_fhx <- function(fname, encoding, text, verbose = TRUE) {
   if (missing(encoding)) {
     encoding <- getOption("encoding")
   }
@@ -130,7 +131,10 @@ read_fhx <- function(fname, encoding, text) {
     year = fl_body_melt$year, series = fl_body_melt$series,
     rec_type = fl_body_melt$rec_type
   )
-  check_series(f)
+  if (verbose) {
+    check_series(f)
+  }
+
   f
 }
 
