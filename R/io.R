@@ -296,6 +296,25 @@ check_series <- function(x, keep_checks = FALSE) {
       )
     }
   }
+
+  ## Duplicate event years
+  dup_events <- check_file %>%
+    filter(.data$gen_type == "recorder") %>%
+    group_by(.data$series, .data$year) %>%
+    summarize(n = n()) %>%
+    filter(n > 1)
+
+  if (nrow(dup_events) > 0){
+    for (i in 1:nrow(dup_events)) {
+      bad_series <- dup_events$series[i] %>% as.character()
+      cli_alert_danger(
+        c("Series {style_bold({bad_series})} includes multiple scar or injury",
+          " codes in {dup_events$year[i]}."),
+        wrap = TRUE
+      )
+    }
+  }
+
   if (keep_checks) {
     return(list(
       "no_ends" = no_ends,
@@ -303,7 +322,9 @@ check_series <- function(x, keep_checks = FALSE) {
       "dup_ends" = dup_years,
       "emtpy_series" = empty_series,
       "inner_diffs" = inner_diffs,
-      "outer_diffs" = outer_diffs))
+      "outer_diffs" = outer_diffs,
+      "dup_events" = dup_events)
+    )
   }
 }
 
@@ -393,9 +414,12 @@ write_fhx <- function(x, fname = "") {
   if (any(
     c(nrow(chk_list$dup_ends) > 0,
       nrow(chk_list$inner_diffs) > 0,
-      nrow(chk_list$outer_diffs) > 0)
+      nrow(chk_list$outer_diffs) > 0,
+      nrow(chk_list$dup_events) > 0
+      )
     )
   ) abort("Data errors listed above prevent the creation of an FHX file")
+
   if (violates_canon(x)) {
     cli_alert_info(
       c("The output file includes codes that violate FHX2",
