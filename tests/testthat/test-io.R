@@ -763,6 +763,14 @@ test_that("check_series() alerts of series with outer codes before scars", {
   expect_message(check_series(df))
 })
 
+test_that("check_series() alerts of series with two event codes in the same year", {
+  series <- "ABC123"
+  year <- c(1935, 1950, 1950, 1952)
+  rec_type <- c("pith_year", "dormant_fs", "unknown_fs", "bark_year")
+  df <- fhx(year, series, rec_type) + TEST_FHX
+  expect_message(check_series(df))
+})
+
 test_that("violates_canon() warns users of new seasonality designations", {
   series <- "ABC123"
   year <- 1950:1952
