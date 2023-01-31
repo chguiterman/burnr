@@ -152,7 +152,7 @@ read_fhx <- function(fname, encoding, text, verbose = TRUE) {
 #' @importFrom dplyr  %>% mutate filter group_by summarize n case_when
 #' @importFrom rlang .data
 #' @importFrom forcats fct_collapse fct_count
-#' @importFrom cli cli_alert_info cli_alert_danger style_bold
+#' @importFrom cli cli_alert_info cli_alert_danger cli_alert_success style_bold
 #' @importFrom stringr str_c
 #'
 #' @examples
@@ -314,6 +314,22 @@ check_series <- function(x, keep_checks = FALSE) {
         wrap = TRUE
       )
     }
+  }
+
+  ## Successful checks
+  if (! any(
+    c(
+      nrow(bad_ends) > 0,
+      nrow(dup_years) > 0,
+      nrow(inner_diffs) > 0,
+      nrow(outer_diffs) > 0,
+      nrow(dup_events) > 0
+    )
+  )
+  ) {
+    cli_alert_success(
+      c("Key checks successful for all {length(series_names(x))} series")
+    )
   }
 
   if (keep_checks) {
