@@ -841,7 +841,7 @@ violates_canon <- function(x) {
 #' @return A revised `fhx` object with corrected series end years. Check your
 #'   work via [check_series]
 #'
-#' @importFrom dplyr %>% group_by summarize filter anti_join
+#' @importFrom dplyr %>% group_by reframe filter anti_join
 #' @importFrom cli cli_alert_success cli_ul cli_end
 #'
 #' @export
@@ -851,7 +851,7 @@ remove_duplicate_series_end <- function(x, s, keep_event = TRUE) {
   out <- x
   yr_dups <- x %>%
     group_by(.data$series, .data$year) %>%
-    summarize(n_rec = n()) %>%
+    reframe(n_rec = n()) %>%
     filter(.data$n_rec > 1) %>%
     suppressMessages()
 
