@@ -149,7 +149,7 @@ read_fhx <- function(fname, encoding, text, verbose = TRUE) {
 #'   where and when issues are found. If `keep_checks = TRUE`, a list object
 #'   with the set of check data.
 #'
-#' @importFrom dplyr  %>% mutate filter group_by summarize n case_when
+#' @importFrom dplyr  %>% mutate filter group_by reframe n case_when
 #' @importFrom rlang .data
 #' @importFrom forcats fct_collapse fct_count
 #' @importFrom cli cli_alert_info cli_alert_danger cli_alert_success style_bold
@@ -189,8 +189,8 @@ check_series <- function(x, keep_checks = FALSE) {
   end_code_counts <- check_file %>%
     filter(.data$gen_type %in% c("inner", "outer")) %>%
     group_by(.data$series) %>%
-    summarize(fct_count(factor(.data$gen_type))) %>%
-    suppressMessages()
+    reframe(fct_count(factor(.data$gen_type))) #%>%
+    # suppressMessages()
 
   ##TODO: If the series ends on a recorder year, a system warning is triggered:
   # Warning message:
@@ -203,7 +203,7 @@ check_series <- function(x, keep_checks = FALSE) {
   ## Excluded start/end indicators
   no_ends <- end_code_counts %>%
     group_by(.data$series) %>%
-    summarize(n = n()) %>%
+    reframe(n = n()) %>%
     filter(.data$n < 2)
 
   if (nrow(no_ends) > 0) {
@@ -235,7 +235,7 @@ check_series <- function(x, keep_checks = FALSE) {
   ## ID series lacking scar/injury codes
   empty_series <- check_file %>%
     group_by(.data$series) %>%
-    summarize(n_rec = sum(.data$gen_type == "recorder")) %>%
+    reframe(n_rec = sum(.data$gen_type == "recorder")) %>%
     filter(.data$n_rec == 0)
 
   if (nrow(empty_series) > 0) {
@@ -249,7 +249,7 @@ check_series <- function(x, keep_checks = FALSE) {
     filter(! .data$series %in% no_ends$series,
            ! .data$series %in% empty_series$series) %>%
     group_by(.data$series) %>%
-    summarize(inner_diff = .data$year[.data$gen_type == "inner"] -
+    reframe(inner_diff = .data$year[.data$gen_type == "inner"] -
                 min(.data$year[.data$gen_type == "recorder"]),
               outer_diff = max(.data$year[.data$gen_type == "recorder"] -
                                  max(.data$year[.data$gen_type == "outer"],
@@ -310,7 +310,7 @@ check_series <- function(x, keep_checks = FALSE) {
   dup_events <- check_file %>%
     filter(.data$gen_type == "recorder") %>%
     group_by(.data$series, .data$year) %>%
-    summarize(n = n()) %>%
+    reframe(n = n()) %>%
     filter(n > 1)
 
   if (nrow(dup_events) > 0){
