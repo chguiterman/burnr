@@ -251,10 +251,9 @@ check_series <- function(x, keep_checks = FALSE) {
     group_by(.data$series) %>%
     reframe(inner_diff = .data$year[.data$gen_type == "inner"] -
                 min(.data$year[.data$gen_type == "recorder"]),
-              outer_diff = max(.data$year[.data$gen_type == "recorder"] -
-                                 max(.data$year[.data$gen_type == "outer"],
-                                     na.rm = TRUE))
-    )
+              outer_diff = max(.data$year[.data$gen_type == "recorder"]) -
+                                 .data$year[.data$gen_type == "outer"])
+
   ## Recorder years the same as inner or outer year
   dup_years <- rec_diffs %>%
     filter(.data$inner_diff == 0 | .data$outer_diff == 0)
