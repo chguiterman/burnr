@@ -236,6 +236,11 @@ check_series <- function(x, keep_checks = FALSE) {
     }
   }
 
+  ## If all of the series are flagged to this point, skip to checking for
+  ## duplicates
+  if (length(series_names(x)) != sum(nrow(no_ends), nrow(empty_series))) {
+
+
   ## Check whether scars/injuries exist beyond start/end years
   rec_diffs <- check_file %>%
     filter(! .data$series %in% no_ends$series,
@@ -296,7 +301,7 @@ check_series <- function(x, keep_checks = FALSE) {
       )
     }
   }
-
+}
   ## Duplicate event years
   dup_events <- check_file %>%
     filter(.data$gen_type == "recorder") %>%
@@ -314,6 +319,7 @@ check_series <- function(x, keep_checks = FALSE) {
       )
     }
   }
+
 
   ## Successful checks
   if (! any(
