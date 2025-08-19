@@ -187,23 +187,15 @@ check_series <- function(x, keep_checks = FALSE) {
 
   ## Count end types
   end_code_counts <- check_file %>%
-    filter(.data$gen_type %in% c("inner", "outer")) %>%
     group_by(.data$series) %>%
-    reframe(fct_count(factor(.data$gen_type))) #%>%
-    # suppressMessages()
+    reframe(fct_count(factor(.data$gen_type))) %>%
+    tidyr::complete(.data$series, .data$f, fill = list(n = 0)) %>%
+    filter(.data$f %in% c("inner", "outer"))
 
-  ##TODO: If the series ends on a recorder year, a system warning is triggered:
-  # Warning message:
-  #   There was 1 warning in `summarize()`.
-  # ℹ In argument: `outer_diff = max(...)`.
-  # ℹ In group 10: `series = UCM16`.
-  # Caused by warning in `max()`:
-  #   ! no non-missing arguments to max; returning -Inf
 
   ## Excluded start/end indicators
   no_ends <- end_code_counts %>%
-    group_by(.data$series) %>%
-    reframe(n = n()) %>%
+    reframe(n = n(), .by = .data$series) %>%
     filter(.data$n < 2)
 
   if (nrow(no_ends) > 0) {
