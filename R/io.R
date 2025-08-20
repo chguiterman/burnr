@@ -236,8 +236,8 @@ check_series <- function(x, keep_checks = FALSE) {
     }
   }
 
-  ## If the below condition is true, a warning is thrown about empty data from the min() function below
-
+  ## If all of the series are caught with no end terms or no scars, the next set
+  ## of tests are meaningless, so this if() statement bypasses them
   if (length(series_names(x)) != sum(nrow(no_ends), nrow(empty_series))) {
 
   ## Check whether scars/injuries exist beyond start/end years
