@@ -243,7 +243,8 @@ check_series <- function(x, keep_checks = FALSE) {
   ## Check whether scars/injuries exist beyond start/end years
   rec_diffs <- check_file %>%
     filter(! .data$series %in% no_ends$series,
-           ! .data$series %in% empty_series$series) %>%
+           ! .data$series %in% empty_series$series,
+           ! .data$series %in% bad_ends$series) %>%
     group_by(.data$series) %>%
     reframe(inner_diff = .data$year[.data$gen_type == "inner"] -
                 min(.data$year[.data$gen_type == "recorder"]),
